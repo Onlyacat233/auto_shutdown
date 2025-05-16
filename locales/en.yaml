@@ -1,0 +1,7 @@
+_version: 1
+dialog.yes: Yes
+dialog.no: No
+on_shutdown.title: System is going to shutdown
+on_shutdown.content: System will be shutdown in 10 secound, please be sure
+error.title: Error
+error.type.failed_to_shutdown: Error, Failed to shutdown

@@ -1,0 +1,7 @@
+_version: 1
+dialog.yes: 是
+dialog.no: 否
+on_shutdown.title: 即将关机
+on_shutdown.content: 系统将于10秒钟后自动关机,请确认
+error.title: 错误
+error.type.failed_to_shutdown: 错误,无法关机
