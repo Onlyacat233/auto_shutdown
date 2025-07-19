@@ -1,3 +1,5 @@
+#![windows_subsystem = "windows"]
+
 use chrono::{DateTime, Datelike, Local, Weekday};
 use clokwerk::{Job, Scheduler, TimeUnits};
 use config::Config;
