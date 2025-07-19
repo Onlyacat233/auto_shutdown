@@ -3,7 +3,7 @@ use clokwerk::{Job, Scheduler, TimeUnits};
 use config::Config;
 use native_dialog::DialogBuilder;
 use rust_i18n::t;
-use std::{collections::HashMap, sync::mpsc::channel, thread, time::Duration};
+use std::{collections::HashMap, thread, time::Duration};
 use system_shutdown::shutdown;
 
 rust_i18n::i18n!("locales");
@@ -106,10 +106,8 @@ fn get_settings() -> HashMap<String, String> {
 
 fn check_date() {
     let now: DateTime<Local> = Local::now();
-    if now.month() == 6
-        && now.day() >= 7
-        && (now.day() <= 10) | (now.weekday() == Weekday::Sat) | (now.weekday() == Weekday::Sun)
-    {
+
+    if now.month() == 6 && now.day() >= 7 && (now.day() <= 10) | (now.weekday() == Weekday::Sat) {
         shutdown().unwrap();
     }
 }
@@ -130,14 +128,7 @@ fn main() {
 
     let thread_handle = sched.watch_thread(Duration::from_millis(100));
 
-    let (tx, rx) = channel();
-
-    ctrlc::set_handler(move || tx.send(()).expect("Could not send signal on channel."))
-        .expect("Error setting Ctrl-C handler");
-
-    println!("Ctrl-C to exit...");
-    rx.recv().expect("Could not receive from channel.");
+    thread::park();
 
     thread_handle.stop();
 }
-
